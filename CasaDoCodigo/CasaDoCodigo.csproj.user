@@ -4,7 +4,8 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>IIS Express</ActiveDebugProfile>
+    <ActiveDebugProfile>CasaDoCodigo</ActiveDebugProfile>
     <WebStackScaffolding_DependencyDialogWidth>600</WebStackScaffolding_DependencyDialogWidth>
+    <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
 </Project>

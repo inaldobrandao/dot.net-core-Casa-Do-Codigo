@@ -7,3 +7,13 @@ C:\Desenvolvimento\workspace.net\CasaDoCodigo\CasaDoCodigo\CasaDoCodigo\obj\Debu
 C:\Desenvolvimento\workspace.net\CasaDoCodigo\CasaDoCodigo\CasaDoCodigo\obj\Debug\netcoreapp1.1\CasaDoCodigo.AssemblyInfo.cs
 C:\Desenvolvimento\workspace.net\CasaDoCodigo\CasaDoCodigo\CasaDoCodigo\obj\Debug\netcoreapp1.1\CasaDoCodigo.dll
 C:\Desenvolvimento\workspace.net\CasaDoCodigo\CasaDoCodigo\CasaDoCodigo\obj\Debug\netcoreapp1.1\CasaDoCodigo.pdb
+C:\Desenvolvimento\alura\dot.net-core-Casa-Do-Codigo\CasaDoCodigo\bin\Debug\netcoreapp1.1\CasaDoCodigo.deps.json
+C:\Desenvolvimento\alura\dot.net-core-Casa-Do-Codigo\CasaDoCodigo\bin\Debug\netcoreapp1.1\CasaDoCodigo.runtimeconfig.json
+C:\Desenvolvimento\alura\dot.net-core-Casa-Do-Codigo\CasaDoCodigo\bin\Debug\netcoreapp1.1\CasaDoCodigo.runtimeconfig.dev.json
+C:\Desenvolvimento\alura\dot.net-core-Casa-Do-Codigo\CasaDoCodigo\bin\Debug\netcoreapp1.1\CasaDoCodigo.dll
+C:\Desenvolvimento\alura\dot.net-core-Casa-Do-Codigo\CasaDoCodigo\bin\Debug\netcoreapp1.1\CasaDoCodigo.pdb
+C:\Desenvolvimento\alura\dot.net-core-Casa-Do-Codigo\CasaDoCodigo\obj\Debug\netcoreapp1.1\CasaDoCodigo.csprojResolveAssemblyReference.cache
+C:\Desenvolvimento\alura\dot.net-core-Casa-Do-Codigo\CasaDoCodigo\obj\Debug\netcoreapp1.1\CasaDoCodigo.csproj.CoreCompileInputs.cache
+C:\Desenvolvimento\alura\dot.net-core-Casa-Do-Codigo\CasaDoCodigo\obj\Debug\netcoreapp1.1\CasaDoCodigo.AssemblyInfo.cs
+C:\Desenvolvimento\alura\dot.net-core-Casa-Do-Codigo\CasaDoCodigo\obj\Debug\netcoreapp1.1\CasaDoCodigo.dll
+C:\Desenvolvimento\alura\dot.net-core-Casa-Do-Codigo\CasaDoCodigo\obj\Debug\netcoreapp1.1\CasaDoCodigo.pdb
