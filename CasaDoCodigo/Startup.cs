@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace CasaDoCodigo
 {
@@ -29,10 +30,15 @@ namespace CasaDoCodigo
         {
             // Add framework services.
             services.AddMvc();
+
+            string connectionString = Configuration.GetSection("ConnectionStrings").GetValue<String>("Default");
+            services.AddDbContext<Contexto>(options => options.UseSqlServer(connectionString));
+
+            services.AddTransient<IDataService, DataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -55,6 +61,10 @@ namespace CasaDoCodigo
                     name: "default",
                     template: "{controller=Pedido}/{action=Carrossel}/{id?}");
             });
+
+            IDataService dataService = serviceProvider.GetService<IDataService>();
+            dataService.InicializaDB();
+
         }
     }
 }

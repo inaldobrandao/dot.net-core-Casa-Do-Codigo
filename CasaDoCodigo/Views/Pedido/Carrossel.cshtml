@@ -1,55 +1,43 @@
 ﻿@{ 
     ViewData["Title"] = "Carrossel";
 }
-
+@model List<Produto>
 <h3>Catálogo</h3>
 
 <div id="my-carousel" class="carousel slide" data-ride="carousel">
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <div class="row">
-                @for (int i = 0; i < 4; i++)
-                {
-                    <div class="col-md-3">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <img src="~/images/produtos/large_@(Model[i].Id).jpg" />
-                            </div>
-                            <div class="panel-footer">
-                                <div>@(Model[i].Nome)</div>
-                                <div>@(Model[i].Preco)</div>
-                                <div class="text-center">
-                                    <a asp-action="Carrinho">Adicionar</a>
+        @{ 
+            const int TAMANHO_PAGINA = 4;
+            int numPaginas = (int)Math.Ceiling((double)Model.Count() / TAMANHO_PAGINA);
+        }
+        @for(int pagina = 0; pagina < numPaginas; pagina++)
+        {
+            <div class="item @(pagina == 0 ? "active" : "")">
+                <div class="row">
+                    @{ 
+                        var produtosDaPagina = Model.Skip(TAMANHO_PAGINA * pagina).Take(TAMANHO_PAGINA);
+                    }
+                    @foreach (var produto in produtosDaPagina)
+                    {
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <img src="~/images/produtos/large_@(produto.Id).jpg" />
+                                </div>
+                                <div class="panel-footer">
+                                    <div>@(produto.Nome)</div>
+                                    <div>@(produto.Preco)</div>
+                                    <div class="text-center">
+                                        <a asp-action="Carrinho">Adicionar</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                }
-            </div>
-        </div>
-        <div class="item">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <img src="~/images/produtos/large_2.jpg" />
-                </div>
-                <div class="panel-footer">
-                    <div>May the code be with you</div>
-                    <div>R$ 59,90</div>
+                    }
                 </div>
             </div>
-        </div>
-        <div class="item">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <img src="~/images/produtos/large_3.jpg" />
-                </div>
-                <div class="panel-footer">
-                    <div>Camiseta Como seria bom</div>
-                    <div>R$ 59,90</div>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 
     <!-- Controls -->
