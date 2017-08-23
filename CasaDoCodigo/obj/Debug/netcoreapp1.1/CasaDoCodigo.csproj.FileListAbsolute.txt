@@ -17,3 +17,4 @@ C:\Desenvolvimento\alura\dot.net-core-Casa-Do-Codigo\CasaDoCodigo\obj\Debug\netc
 C:\Desenvolvimento\alura\dot.net-core-Casa-Do-Codigo\CasaDoCodigo\obj\Debug\netcoreapp1.1\CasaDoCodigo.AssemblyInfo.cs
 C:\Desenvolvimento\alura\dot.net-core-Casa-Do-Codigo\CasaDoCodigo\obj\Debug\netcoreapp1.1\CasaDoCodigo.dll
 C:\Desenvolvimento\alura\dot.net-core-Casa-Do-Codigo\CasaDoCodigo\obj\Debug\netcoreapp1.1\CasaDoCodigo.pdb
+C:\Desenvolvimento\alura\dot.net-core-Casa-Do-Codigo\CasaDoCodigo\obj\Debug\netcoreapp1.1\CasaDoCodigo.AssemblyInfoInputs.cache

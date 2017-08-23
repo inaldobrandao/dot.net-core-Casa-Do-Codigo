@@ -53,5 +53,18 @@ namespace CasaDoCodigo
                 this._contexto.SaveChanges();
             }
         }
+
+        public void UpdateItemPedido(ItemPedido itemPedido)
+        {
+            var itemPedidoDB = this._contexto.ItensPedido
+                .Where(i => i.Id == itemPedido.Id)
+                .SingleOrDefault();
+
+            if(itemPedidoDB != null)
+            {
+                itemPedidoDB.AtualizaQuantidade(itemPedido.Quantidade);
+                this._contexto.SaveChanges();
+            }
+        }
     }
 }

@@ -46,5 +46,11 @@ namespace CasaDoCodigo.Controllers
             CarrinhoViewModel viewModel = GetCarrinhoViewModel();
             return View(viewModel);
         }
+
+        [HttpPost]
+        public void PostQuantidade([FromBody] ItemPedido input)
+        {
+            this._dataService.UpdateItemPedido(input);
+        }
     }
 }

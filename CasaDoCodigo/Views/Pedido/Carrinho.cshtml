@@ -24,13 +24,27 @@
     <div class="panel-body">
         @foreach (var item in Model.Itens)
         {
-            <div class="row row-center">
+            <div class="row row-center" item-id="@item.Id">
                 <div class="col-md-3">
                     <img src="~/images/produtos/small_@(item.Id).jpg" />
                 </div>
                 <div class="col-md-3">@item.Produto.Nome</div>
                 <div class="col-md-2 text-center">@item.PrecoUnitario</div>
-                <div class="col-md-2 text-center">@item.Quantidade</div>
+                <div class="col-md-2 text-center">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" onclick="carrinho.clickDecremento(this)">
+                                <span class="glyphicon-minus"></span>
+                            </button>
+                        </span>
+                        <input type="text" class="form-control text-center" value="@item.Quantidade" onblur="updateQuantidade(this)"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" onclick="carrinho.clickIncremento(this)">
+                                <span class="glyphicon-plus"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
                 <div class="col-md-2">
                     <span class="pull-right">@item.Subtotal</span>
                 </div>
@@ -53,3 +67,8 @@
         <a asp-action="Resumo" class="btn btn-success pull-right">Finalizar Pedido</a>
     </div>
 </div>
+
+@section Scripts
+{ 
+    <script src="~/js/carrinho.js"></script>
+}
