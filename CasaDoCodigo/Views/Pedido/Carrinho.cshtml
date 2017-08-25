@@ -4,6 +4,9 @@
 @using CasaDoCodigo.Models.ViewModels
 @model CarrinhoViewModel
 <h3>Meu Carrinho</h3>
+<form method="post">
+    @Html.AntiForgeryToken();
+</form>
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="row">
@@ -26,7 +29,7 @@
         {
             <div class="row row-center" item-id="@item.Id">
                 <div class="col-md-3">
-                    <img src="~/images/produtos/small_@(item.Id).jpg" />
+                    <img src="~/images/produtos/small_@(item.Produto.Id).jpg" />
                 </div>
                 <div class="col-md-3">@item.Produto.Nome</div>
                 <div class="col-md-2 text-center">@item.PrecoUnitario</div>
@@ -37,7 +40,7 @@
                                 <span class="glyphicon-minus"></span>
                             </button>
                         </span>
-                        <input type="text" class="form-control text-center" value="@item.Quantidade" onblur="updateQuantidade(this)"/>
+                        <input type="text" class="form-control text-center" value="@item.Quantidade" onblur="carrinho.updateQuantidade(this)"/>
                         <span class="input-group-btn">
                             <button class="btn btn-default" onclick="carrinho.clickIncremento(this)">
                                 <span class="glyphicon-plus"></span>
@@ -46,7 +49,7 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <span class="pull-right">@item.Subtotal</span>
+                    R$ <span class="pull-right" subtotal>@item.Subtotal</span>
                 </div>
             </div>
         }
@@ -54,17 +57,20 @@
     <div class="panel-footer">
         <div class="row">
             <div class="col-md-10">
-                <span>Total: @Model.Itens.Count() @(Model.Itens.Count() < 2 ? "item" : "itens")</span>
+               <span numero-itens> Total: @Model.Itens.Count() @(Model.Itens.Count() < 2 ? "item" : "itens")</span>
             </div>
             <div class="col-md-2">
-                <span class="pull-right">Total: R$ @Model.Total</span>
+                Total: R$ <span class="pull-right" total>@Model.Total</span>
             </div>
         </div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <a asp-action="Resumo" class="btn btn-success pull-right">Finalizar Pedido</a>
+        <div class="pull-right">
+            <a asp-action="Carrossel" class="btn btn-success">Adicionar Produtos</a>
+            <a asp-action="Cadastro" class="btn btn-success">Preencher Cadastro</a>
+        </div>
     </div>
 </div>
 

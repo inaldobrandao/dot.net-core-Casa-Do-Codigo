@@ -24,8 +24,13 @@ namespace CasaDoCodigo.Controllers
             return View(produtos);
         }
 
-        public IActionResult Carrinho()
+        public IActionResult Carrinho(int? produtoId)
         {
+            if (produtoId.HasValue)
+            {
+                _dataService.AddItemPedido(produtoId.Value);            
+            }
+
             CarrinhoViewModel viewModel = GetCarrinhoViewModel();
 
             return View(viewModel);
@@ -41,16 +46,43 @@ namespace CasaDoCodigo.Controllers
             return viewModel;
         }
 
-        public IActionResult Resumo()
+        public IActionResult Cadastro()
         {
-            CarrinhoViewModel viewModel = GetCarrinhoViewModel();
-            return View(viewModel);
+            var pedido = _dataService.GetPedido();
+
+            if(pedido == null)
+            {
+                return RedirectToAction("Carrosel");
+            }
+            else
+            {
+                return View(pedido);
+            }
+
         }
 
         [HttpPost]
-        public void PostQuantidade([FromBody] ItemPedido input)
+        [ValidateAntiForgeryToken]
+        public IActionResult Resumo(Pedido cadastro)
         {
-            this._dataService.UpdateItemPedido(input);
+            if (ModelState.IsValid)
+            {
+                var pedido = _dataService.UpdateCadastro(cadastro);
+                return View(pedido);
+            }
+            else
+            {
+                return RedirectToAction("Cadastro");
+            }
+
+            
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public UpdateItemPedidoResponse PostQuantidade([FromBody] ItemPedido input)
+        {
+            return this._dataService.UpdateItemPedido(input);
         }
     }
 }

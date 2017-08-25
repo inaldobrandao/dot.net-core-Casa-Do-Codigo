@@ -29,7 +29,7 @@
                                     <div>@(produto.Nome)</div>
                                     <div>@(produto.Preco)</div>
                                     <div class="text-center">
-                                        <a asp-action="Carrinho">Adicionar</a>
+                                        <a asp-action="Carrinho" asp-route-produtoId="@(produto.Id)">Adicionar</a>
                                     </div>
                                 </div>
                             </div>

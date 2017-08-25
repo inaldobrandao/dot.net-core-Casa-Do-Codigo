@@ -1,23 +1,72 @@
 ﻿using CasaDoCodigo.Models;
+using CasaDoCodigo.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace CasaDoCodigo
 {
     public class DataService : IDataService
     {
         private readonly Contexto _contexto;
-
-        public DataService(Contexto contexto)
+        private readonly IHttpContextAccessor _contextAccessor;
+        public DataService(Contexto contexto, IHttpContextAccessor contextAccessor)
         {
             this._contexto = contexto;
+            this._contextAccessor = contextAccessor;
+        }
+
+        public void AddItemPedido(int produtoId)
+        {
+            
+
+            var produto = _contexto.Produtos.Where(p => p.Id == produtoId).SingleOrDefault();
+
+            if(produto != null)
+            {
+                int? pedidoId = GetSessionPedidoId();
+
+                Pedido pedido = null;
+                if (pedidoId.HasValue)
+                {
+                    pedido = _contexto.Pedidos.Where(p => p.Id == pedidoId.Value).SingleOrDefault();
+                }
+
+                if (pedido == null)
+                    pedido = new Pedido();
+
+                if (!_contexto.ItensPedido
+                    .Where(i =>
+                        i.Pedido.Id == pedido.Id &&
+                        i.Produto.Id == produtoId)
+                    .Any())
+                {
+                    _contexto.ItensPedido.Add(new ItemPedido(pedido, produto, 1));
+                    _contexto.SaveChanges();
+                    SetSessionPedidoId(pedido);
+                }
+            }
+
+        }
+
+        private void SetSessionPedidoId(Pedido pedido)
+        {
+            _contextAccessor.HttpContext.Session.SetInt32("pedidoId", pedido.Id);
+        }
+
+        private int? GetSessionPedidoId()
+        {
+            return _contextAccessor.HttpContext.Session.GetInt32("pedidoId");
         }
 
         public List<ItemPedido> GetItensPedido()
         {
-            return this._contexto.ItensPedido.ToList();
+            var pedidoId = GetSessionPedidoId();
+            var pedido = _contexto.Pedidos.Where(p => p.Id == pedidoId).SingleOrDefault();
+            return this._contexto.ItensPedido.Where(i => i.Pedido.Id == pedido.Id).ToList();
         }
 
         public List<Produto> GetProdutos()
@@ -47,14 +96,14 @@ namespace CasaDoCodigo
                 {
                     this._contexto.Produtos.Add(produto);
 
-                    this._contexto.ItensPedido.Add(new ItemPedido(produto, 1));
+                    //this._contexto.ItensPedido.Add(new ItemPedido(produto, 1));
                 }
 
                 this._contexto.SaveChanges();
             }
         }
 
-        public void UpdateItemPedido(ItemPedido itemPedido)
+        public UpdateItemPedidoResponse UpdateItemPedido(ItemPedido itemPedido)
         {
             var itemPedidoDB = this._contexto.ItensPedido
                 .Where(i => i.Id == itemPedido.Id)
@@ -63,8 +112,35 @@ namespace CasaDoCodigo
             if(itemPedidoDB != null)
             {
                 itemPedidoDB.AtualizaQuantidade(itemPedido.Quantidade);
+
+                if (itemPedidoDB.Quantidade == 0)
+                    _contexto.ItensPedido.Remove(itemPedidoDB);
+
                 this._contexto.SaveChanges();
             }
+
+            var itensPedido = _contexto.ItensPedido.ToList();
+
+            var carrinhoViewModel = new CarrinhoViewModel(itensPedido);
+
+            return new UpdateItemPedidoResponse(itemPedidoDB, carrinhoViewModel);
+        }
+
+        public Pedido GetPedido()
+        {
+            int? pedidoId = GetSessionPedidoId();
+            return _contexto.Pedidos
+                .Include(p => p.Itens)
+                    .ThenInclude(p => p.Produto)
+                .Where(p => p.Id == pedidoId).SingleOrDefault();
+        }
+
+        public object UpdateCadastro(Pedido cadastro)
+        {
+            var pedido = GetPedido();
+            pedido.UpdateCadastro(cadastro);
+            _contexto.SaveChanges();
+            return pedido;
         }
     }
 }

@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Cadastro";
+}
+@model Pedido
+<h3>Cadastro</h3>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form role="form" method="post" asp-action="Resumo">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label" for="nomeCliente">Nome Cliente</label>
+                    <input type="text" class="form-control" id="nomeCliente" asp-for="Nome" placeholder="Nome Cliente">
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="email">Email</label>
+                    <input type="email" class="form-control" id="email" asp-for="Email" placeholder="Email">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="telefone">Telefone</label>
+                    <input type="text" class="form-control" id="telefone" asp-for="Telefone" placeholder="Telefone">
+                    <span asp-validation-for="Telefone" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label" for="endereco">Endereço</label>
+                    <input type="text" class="form-control" id="endereco" asp-for="Endereco" placeholder="Endereço">
+                    <span asp-validation-for="Endereco" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="complemento">Complemento</label>
+                    <input type="text" class="form-control" id="complemento" asp-for="Complemento" placeholder="Complemento">
+                    <span asp-validation-for="Complemento" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="bairro">Bairro</label>
+                    <input type="text" class="form-control" id="bairro" asp-for="Bairro" placeholder="Bairro">
+                    <span asp-validation-for="Bairro" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label" for="municipio">Municipio</label>
+                    <input type="text" class="form-control" id="municipio" asp-for="Municipio" placeholder="Municipio">
+                    <span asp-validation-for="Municipio" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="uf">UF</label>
+                    <input type="text" class="form-control" id="uf" asp-for="UF" placeholder="UF">
+                    <span asp-validation-for="UF" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="cep">CEP</label>
+                    <input type="text" class="form-control" id="cep" asp-for="CEP" placeholder="CEP">
+                    <span asp-validation-for="CEP" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <a asp-action="Carrinho" class="btn btn-success">Continuar Comprando</a>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Finalizar Pedido</button>
+            </div>
+        </form>
+    </div>
+</div>
